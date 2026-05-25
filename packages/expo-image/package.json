@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@types/react": "~19.2.0",
+    "@types/react-dom": "~19.2.0",
     "@types/node": "^22.14.0",
     "expo-module-scripts": "workspace:*"
   },
@@ -39,10 +40,14 @@
     "expo": "workspace:*",
     "react": "*",
     "react-native": "*",
-    "react-native-web": "*"
+    "react-native-web": "*",
+    "react-dom": "*"
   },
   "peerDependenciesMeta": {
     "react-native-web": {
+      "optional": true
+    },
+    "react-dom": {
       "optional": true
     }
   },

@@ -1,5 +1,6 @@
 import type { Ref } from 'react';
 import React, { useEffect, useId } from 'react';
+import { preload } from 'react-dom';
 
 import ColorTintFilter, { getTintColorStyle } from './ColorTintFilter';
 import type { ImageWrapperProps } from './ImageWrapper.types';
@@ -66,6 +67,15 @@ const ImageWrapper = React.forwardRef(
     if (!sourceWithHeaders) {
       return null;
     }
+    // @ts-ignore
+    // eslint-disable-next-line react/no-unknown-property
+    const fetchPriority = getFetchPriorityFromImagePriority(priority || 'normal');
+
+    if (sourceWithHeaders?.uri && (fetchPriority === 'high' || loading === 'eager')) {
+      preload(sourceWithHeaders?.uri, {
+        as: 'image',
+      });
+    }
     return (
       <>
         <ColorTintFilter id={tintId} tintColor={tintColor} />
@@ -83,8 +93,7 @@ const ImageWrapper = React.forwardRef(
             ...(isImageHash ? hashPlaceholderStyle : {}),
           }}
           // @ts-ignore
-          // eslint-disable-next-line react/no-unknown-property
-          fetchPriority={getFetchPriorityFromImagePriority(priority || 'normal')}
+          fetchPriority={fetchPriority}
           loading={loading || undefined}
           draggable={draggable}
           {...getImageWrapperEventHandler(events, sourceWithHeaders)}

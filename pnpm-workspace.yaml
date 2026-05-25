@@ -45,3 +45,16 @@ minimumReleaseAgeExclude:
   - '@react-native/*'
   - 'react-native'
   - multitars
+
+allowBuilds:
+  '@parcel/watcher': set this to true or false
+  '@shopify/react-native-skia': set this to true or false
+  '@swc/core': set this to true or false
+  better-sqlite3: set this to true or false
+  esbuild: set this to true or false
+  fmerge: set this to true or false
+  fsevents: set this to true or false
+  protobufjs: set this to true or false
+  sharp: set this to true or false
+  unrs-resolver: set this to true or false
+  workerd: set this to true or false
