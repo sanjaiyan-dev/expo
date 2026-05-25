@@ -70,10 +70,13 @@ const ImageWrapper = React.forwardRef(
     // @ts-ignore
     // eslint-disable-next-line react/no-unknown-property
     const fetchPriority = getFetchPriorityFromImagePriority(priority || 'normal');
+    const imgPropsFromSource = getImgPropsFromSource(source);
 
     if (sourceWithHeaders?.uri && (fetchPriority === 'high' || loading === 'eager')) {
       preload(sourceWithHeaders?.uri, {
         as: 'image',
+        imageSizes: imgPropsFromSource.sizes,
+        imageSrcSet: imgPropsFromSource.srcSet,
       });
     }
     return (
@@ -97,7 +100,7 @@ const ImageWrapper = React.forwardRef(
           loading={loading || undefined}
           draggable={draggable}
           {...getImageWrapperEventHandler(events, sourceWithHeaders)}
-          {...getImgPropsFromSource(source)}
+          {...imgPropsFromSource}
           {...props}
         />
       </>
